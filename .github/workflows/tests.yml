@@ -28,5 +28,21 @@ jobs:
         run: python main.py --skill "data science" --budget free
       - name: Confirm unknown resources produce no fabricated match
         run: python main.py --skill "quantum underwater basket weaving"
+      - name: Smoke-test Streamlit startup and health endpoint
+        shell: bash
+        run: |
+          python -m streamlit run app.py --server.headless true --server.port 8501 > /tmp/opportunitylens-streamlit.log 2>&1 &
+          app_pid=$!
+          cleanup() { kill "$app_pid" 2>/dev/null || true; }
+          trap cleanup EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8501/_stcore/health; then
+              echo
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/opportunitylens-streamlit.log
+          exit 1
       - name: Compile Python source
         run: python -m compileall -q .
