@@ -8,4 +8,4 @@ RUN python -m pip install --no-cache-dir --upgrade pip && python -m pip install 
 COPY --chown=appuser:appuser . .
 USER appuser
 EXPOSE 8501
-CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.headless=true"]
+CMD ["sh", "-c", "streamlit run app.py --server.address=0.0.0.0 --server.port=${PORT:-8501} --server.headless=true"]
