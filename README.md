@@ -3,6 +3,8 @@
 **A grounded, S3-backed learning-resource tool for CareerPath AI**  
 *AWS Builder Center Weekend Challenge: Give Your Agent a Tool*
 
+[![Deploy on Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/deploy?repository=leelasreeamrutha99-glitch%2FAWS-PROJECT&branch=main&mainModule=app.py)
+
 OpportunityLens adds one carefully bounded tool to a career-learning agent: it retrieves resources from a curated JSON catalog in Amazon S3, validates the records, applies deterministic filters, and returns official links with provenance and review-age metadata. If a topic has no catalog match, it returns no match instead of inventing a course or URL.
 
 > **Honest status:** the local interactive demo and offline tests are designed to run without AWS credentials. The live Strands + Amazon Bedrock + Amazon S3 flow still requires a bucket, IAM permissions, model access, and an actual invocation in your AWS account. Do not describe the live path as tested until you run it.
